@@ -24,7 +24,9 @@ def load_model():
     model_path = 'models/flat_price_model_2020_2025.pkl'
     
     if not os.path.exists(model_path):
-        st.error("❌ Model not found! Please run `python train_model.py` first to train the model.")
+        st.error("❌ Model not found!")
+        st.info("💡 Please run `python src/train_model.py` first to train the model.")
+        st.info("📁 Make sure you have the HDB resale data CSV file in your project folder.")
         st.stop()
     
     try:
