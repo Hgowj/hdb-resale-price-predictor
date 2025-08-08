@@ -26,9 +26,11 @@ A machine learning web application that predicts Singapore HDB (Housing Developm
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.10+
-- pip package manager
+1. **Clone the repository**
+2. **Install dependencies:** `pip install -r requirements.txt`
+3. **Add your data:** Place the HDB resale CSV file in the project folder
+4. **Train the model:** `python src/train_model.py`
+5. **Run the app:** `streamlit run src/app.py`
 
 ### Installation
 
