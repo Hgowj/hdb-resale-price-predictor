@@ -24,9 +24,7 @@ def load_model():
     model_path = 'models/flat_price_model_2020_2025.pkl'
     
     if not os.path.exists(model_path):
-        st.error("❌ Model not found!")
-        st.info("💡 Please run `python src/train_model.py` first to train the model.")
-        st.info("📁 Make sure you have the HDB resale data CSV file in your project folder.")
+        st.error("❌ Model not found! Please run `python train_model.py` first to train the model.")
         st.stop()
     
     try:
@@ -96,7 +94,8 @@ def main():
         st.markdown("""
         This predictor uses a Random Forest model trained on recent HDB resale data from 2020-2025.
         
-        **Accuracy:** Based on recent market data
+        **Coverage:** All 26 towns, 7 flat types, 21 flat models
+        **Accuracy:** Based on 148k+ recent transactions
         **Features:** Location, size, type, age, etc.
         **Data Period:** 2020-2025 (Most Recent)
         """)
@@ -123,6 +122,19 @@ def main():
             if st.button("🏢 Executive Flat", use_container_width=True):
                 st.session_state.example_selected = 'executive'
         
+        st.info("💡 **Tip:** The app now includes all 26 towns and 21 flat models from the official dataset!")
+        
+        # Additional quick examples
+        example_col3, example_col4 = st.columns(2)
+        
+        with example_col3:
+            if st.button("🏙️ Central Area", use_container_width=True):
+                st.session_state.example_selected = 'central'
+        
+        with example_col4:
+            if st.button("🌊 Marine Parade", use_container_width=True):
+                st.session_state.example_selected = 'marine'
+        
         # Set default values based on example selection
         if st.session_state.example_selected == 'typical':
             default_town = 'TAMPINES'
@@ -138,6 +150,20 @@ def main():
             default_area = 130.0
             default_model = 'Premium Apartment'
             default_lease = 75.0
+        elif st.session_state.example_selected == 'central':
+            default_town = 'CENTRAL AREA'
+            default_flat_type = '3 ROOM'
+            default_storey = '04 TO 06'
+            default_area = 85.0
+            default_model = 'Improved'
+            default_lease = 70.0
+        elif st.session_state.example_selected == 'marine':
+            default_town = 'MARINE PARADE'
+            default_flat_type = '5 ROOM'
+            default_storey = '13 TO 15'
+            default_area = 115.0
+            default_model = 'Premium Apartment'
+            default_lease = 80.0
         else:
             default_town = 'TAMPINES'
             default_flat_type = '4 ROOM'
@@ -148,10 +174,15 @@ def main():
         
         # Create form for better UX
         with st.form("prediction_form"):
-            # Town selection with popular options first
-            popular_towns = ['TAMPINES', 'JURONG WEST', 'BEDOK', 'WOODLANDS', 'YISHUN', 'HOUGANG']
-            other_towns = ['ANG MO KIO', 'BUKIT MERAH', 'BUKIT TIMAH', 'CLEMENTI', 'PUNGGOL', 'SENGKANG', 'TOA PAYOH']
-            all_towns = popular_towns + ['---'] + other_towns
+            # All available towns from the dataset (26 towns total)
+            all_towns = [
+                'ANG MO KIO', 'BEDOK', 'BISHAN', 'BUKIT BATOK', 'BUKIT MERAH', 
+                'BUKIT PANJANG', 'BUKIT TIMAH', 'CENTRAL AREA', 'CHOA CHU KANG', 
+                'CLEMENTI', 'GEYLANG', 'HOUGANG', 'JURONG EAST', 'JURONG WEST', 
+                'KALLANG/WHAMPOA', 'MARINE PARADE', 'PASIR RIS', 'PUNGGOL', 
+                'QUEENSTOWN', 'SEMBAWANG', 'SENGKANG', 'SERANGOON', 'TAMPINES', 
+                'TOA PAYOH', 'WOODLANDS', 'YISHUN'
+            ]
             
             # Get index for default town
             town_index = all_towns.index(default_town) if default_town in all_towns else 0
@@ -163,8 +194,9 @@ def main():
                 help="Select the town where the flat is located"
             )
             
-            flat_type_options = ['3 ROOM', '4 ROOM', '5 ROOM', 'EXECUTIVE', '2 ROOM', '1 ROOM']
-            flat_type_index = flat_type_options.index(default_flat_type) if default_flat_type in flat_type_options else 1
+            # All available flat types from dataset
+            flat_type_options = ['1 ROOM', '2 ROOM', '3 ROOM', '4 ROOM', '5 ROOM', 'EXECUTIVE', 'MULTI-GENERATION']
+            flat_type_index = flat_type_options.index(default_flat_type) if default_flat_type in flat_type_options else 3  # Default to 4 ROOM
             
             flat_type = st.selectbox(
                 "🏠 Flat Type",
@@ -173,8 +205,14 @@ def main():
                 help="Select the type of flat"
             )
             
-            storey_options = ['01 TO 03', '04 TO 06', '07 TO 09', '10 TO 12', '13 TO 15', '16 TO 18', '19 TO 21', '22 TO 24', '25 TO 27', '28 TO 30']
-            storey_index = storey_options.index(default_storey) if default_storey in storey_options else 2
+            # All available storey ranges from dataset
+            storey_options = [
+                '01 TO 03', '04 TO 06', '07 TO 09', '10 TO 12', '13 TO 15', 
+                '16 TO 18', '19 TO 21', '22 TO 24', '25 TO 27', '28 TO 30', 
+                '31 TO 33', '34 TO 36', '37 TO 39', '40 TO 42', '43 TO 45', 
+                '46 TO 48', '49 TO 51'
+            ]
+            storey_index = storey_options.index(default_storey) if default_storey in storey_options else 2  # Default to 07 TO 09
             
             storey_range = st.selectbox(
                 "🏢 Storey Range",
@@ -190,7 +228,7 @@ def main():
                 floor_area = st.number_input(
                     "📐 Floor Area (sqm)",
                     min_value=20.0,
-                    max_value=250.0,
+                    max_value=280.0,  # Updated based on data range
                     value=default_area,
                     step=1.0,
                     help="Enter the floor area in square meters"
@@ -206,8 +244,16 @@ def main():
                     help="Enter the remaining lease in years"
                 )
             
-            model_options = ['Model A', 'Improved', 'New Generation', 'Premium Apartment', 'Simplified', 'Standard', 'Model A2', 'Adjoined Flat', 'Terrace']
-            model_index = model_options.index(default_model) if default_model in model_options else 0
+            # All available flat models from dataset
+            model_options = [
+                '2-room', '3Gen', 'Adjoined flat', 'Apartment', 'DBSS', 
+                'Improved', 'Improved-Maisonette', 'Maisonette', 'Model A', 
+                'Model A-Maisonette', 'Model A2', 'Multi Generation', 
+                'New Generation', 'Premium Apartment', 'Premium Apartment Loft', 
+                'Premium Maisonette', 'Simplified', 'Standard', 'Terrace', 
+                'Type S1', 'Type S2'
+            ]
+            model_index = model_options.index(default_model) if default_model in model_options else 8  # Default to Model A
             
             flat_model = st.selectbox(
                 "🏗️ Flat Model",
@@ -229,7 +275,7 @@ def main():
         st.subheader("📊 Prediction Results")
         
         # Make prediction when form is submitted
-        if submitted and town != '---':
+        if submitted:
             user_input = {
                 'town': town,
                 'flat_type': flat_type,
@@ -306,8 +352,8 @@ def main():
             except Exception as e:
                 st.error(f"❌ Error making prediction: {e}")
         
-        elif submitted and town == '---':
-            st.warning("⚠️ Please select a valid town from the dropdown.")
+        elif submitted:
+            st.warning("⚠️ Please fill in all the required fields.")
         
         else:
             # Welcome message
