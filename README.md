@@ -115,13 +115,16 @@ hdb-price-predictor/
 5. **Flat Model** (5%) - Design/layout has moderate impact
 6. **Flat Type** (3%) - Type less important than actual size
 
-## 📈 Data Source
+## 📊 Data Source
 
-- **Dataset**: Singapore HDB Resale Transaction Data
-- **Period**: January 2020 - 2025
-- **Size**: 148,986 transactions
-- **Source**: Singapore government open data
-- **Features**: Town, flat type, storey range, floor area, flat model, remaining lease
+To use this predictor:
+
+1. **Download HDB resale data** from [data.gov.sg](https://data.gov.sg/dataset/resale-flat-prices)
+2. **Place the CSV file** in your project root folder
+3. **Run training script**: `python src/train_model.py`
+4. **Launch app**: `streamlit run src/app.py`
+
+**Expected file:** `ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv`
 
 ## 🎯 Use Cases
 
