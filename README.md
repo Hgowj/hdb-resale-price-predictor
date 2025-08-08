@@ -163,7 +163,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-Project Link: [https://github.com/yourusername/hdb-price-predictor](https://github.com/yourusername/hdb-price-predictor)
+Project Link: (https://github.com/Hgowj/hdb-resale-price-predictor)
 
 ---
 
