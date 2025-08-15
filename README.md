@@ -6,7 +6,7 @@ A machine learning web application that predicts Singapore HDB (Housing Developm
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-orange.svg)
 
-![Main Interface](screenshots/main-interface.png)
+![Main Interface](https://github.com/user-attachments/assets/your-main-interface-image-id)
 *Clean, intuitive interface for inputting flat details*
 
 ## 🎯 Features
@@ -65,8 +65,7 @@ A machine learning web application that predicts Singapore HDB (Housing Developm
 3. Get instant price estimate with confidence range
 4. Use quick examples for common flat types
 
-![Prediction Results](<img width="1255" height="876" alt="image" src="https://github.com/user-attachments/assets/5c1e8bfd-e882-4c45-890e-7933b9f3a8bf" />
-)
+![Prediction Results](https://github.com/user-attachments/assets/5c1e8bfd-e882-4c45-890e-7933b9f3a8bf)
 *Example prediction showing price estimate with confidence interval*
 
 ### Example Prediction
@@ -123,8 +122,7 @@ hdb-price-predictor/
 
 ### Feature Importance
 
-![Feature Importance] (<img width="631" height="331" alt="image" src="https://github.com/user-attachments/assets/0aa331e9-4f11-4c73-a4f5-87ad6580b63f" />
-)
+![Feature Importance](https://github.com/user-attachments/assets/0aa331e9-4f11-4c73-a4f5-87ad6580b63f)
 *Analysis showing which factors most influence HDB prices*
 
 1. **Floor Area** (47%) - Size is the biggest price factor
@@ -189,14 +187,6 @@ The model was validated using:
 | 4 ROOM    | $45,230   | 0.881    | 58,942      |
 | 5 ROOM    | $52,180   | 0.875    | 41,238      |
 | EXECUTIVE | $61,420   | 0.845    | 16,650      |
-
-### How to Contribute
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📈 Performance Benchmarks
 
