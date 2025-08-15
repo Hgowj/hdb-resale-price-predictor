@@ -123,14 +123,15 @@ hdb-price-predictor/
 ### Feature Importance
 
 ![Feature Importance](https://github.com/user-attachments/assets/0aa331e9-4f11-4c73-a4f5-87ad6580b63f)
+
 *Analysis showing which factors most influence HDB prices*
 
-1. **Floor Area** (47%) - Size is the biggest price factor
-2. **Town** (20%) - Location premium matters significantly  
-3. **Storey Range** (13%) - Higher floors command premium
-4. **Remaining Lease** (12%) - Longer leases = higher value
-5. **Flat Model** (5%) - Design/layout has moderate impact
-6. **Flat Type** (3%) - Type less important than actual size
+1. **Remaining Lease** (47%) - Longer leases = higher value
+2. **Flat Model** (20%) - Design/layout has significant impact  
+3. **Floor Area** (13%) - Size is an important price factor
+4. **Storey Range** (12%) - Higher floors command premium
+5. **Flat Type** (5%) - Room count has moderate impact
+6. **Town** (3%) - Location has smaller but notable effect
 
 ### Data Preprocessing
 - **Categorical Encoding**: Label encoding for towns, flat types, models
@@ -158,6 +159,23 @@ To use this predictor:
 - `flat_model`: Flat design model
 - `lease_commence_date`: Year lease started
 - `resale_price`: Transaction price (target variable)
+
+## 🎯 Use Cases
+
+- **Home Buyers**: Estimate fair market price before viewing
+- **Sellers**: Price flats competitively for quick sale
+- **Investors**: Analyze market trends and opportunities
+- **Researchers**: Study Singapore housing market dynamics
+- **Real Estate Agents**: Provide data-driven price guidance
+
+## 🚀 Future Enhancements
+
+- [ ] **Advanced Features**: Add nearby amenities (MRT, schools, malls)
+- [ ] **Time Series**: Incorporate market trend predictions
+- [ ] **Comparison Tool**: Side-by-side flat comparisons
+- [ ] **Market Analysis**: Town-level price trend charts
+- [ ] **Export Options**: Save predictions as PDF reports
+- [ ] **Mobile App**: React Native mobile version
 
 ## ⚠️ Disclaimer
 
@@ -211,3 +229,7 @@ plotly>=5.15.0
 - **Streamlit team** for the amazing web framework that makes deployment simple
 - **scikit-learn community** for robust machine learning tools
 - **Singapore open data initiative** for promoting data transparency
+
+⭐ **Star this repo if you found it helpful!** ⭐
+
+*Built with ❤️ for the Singapore housing community*
