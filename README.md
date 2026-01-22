@@ -4,6 +4,8 @@ A web application that predicts HDB resale flat prices in Singapore using machin
 
 <img width="1863" height="941" alt="image" src="https://github.com/user-attachments/assets/cd9364cc-96b4-427a-8940-397d94c23ccf" />
 
+[Try the app here](https://hdb-resale-price-predictor-drxiy7scqisxe2z8t6avpq.streamlit.app/)
+
 ## About
 
 This application uses a Random Forest model trained on 148,000+ recent HDB resale transactions (2020-2025) to estimate flat prices based on location, flat type, floor area, remaining lease, and other factors.
